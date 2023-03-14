@@ -11,7 +11,7 @@ public class DeleteAccount extends Specification {
     public ValidatableResponse delete(String token){
     return given()
         .spec(requestSpec())
-        .body(token)
+        .auth().oauth2(token.replace("Bearer ", ""))
         .when()
         .delete(ApiDelete)
         .then().log().all();
