@@ -9,6 +9,8 @@ import org.junit.runners.Parameterized;
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertEquals;
+import static org.apache.http.HttpStatus.*;
+
 @RunWith(Parameterized.class)
 public class NotCreateAccountTest {
     private CreateAccount createAccount;
@@ -21,7 +23,7 @@ public class NotCreateAccountTest {
         this.password = password;
         this.name = name;
     }
-    @Parameterized.Parameters
+    @Parameterized.Parameters(name = "DataUser: {0},{1},{2}")
     public static Object[] userAccount() {
         return new Object[][]{
                 {"test-data@yandex.ru", "password",null},
@@ -41,7 +43,7 @@ public class NotCreateAccountTest {
         ValidatableResponse response = createAccount.create(new User("test-data@yandex.ru", "password", "Username"));
         response.assertThat().body("success", is(false)).and().body("message", equalTo("User already exists"));
         int statusCode = response.extract().statusCode();
-        assertEquals("Fail", 403, statusCode);
+        assertEquals("Fail", SC_FORBIDDEN, statusCode);
     }
     @Test
     @DisplayName("создать пользователя без поля данных")
@@ -50,6 +52,6 @@ public class NotCreateAccountTest {
         ValidatableResponse response = createAccount.create(new User(email,password,name));
         response.assertThat().body("success", is(false)).and().body("message", equalTo("Email, password and name are required fields"));
         int statusCode = response.extract().statusCode();
-        assertEquals("Fail", 403, statusCode);
+        assertEquals("Fail", SC_FORBIDDEN, statusCode);
     }
 }

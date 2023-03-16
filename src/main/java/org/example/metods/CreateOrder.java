@@ -1,9 +1,9 @@
 package org.example.metods;
 import io.qameta.allure.Step;
 import io.restassured.response.ValidatableResponse;
-import org.example.model.Data;
+import org.example.Data;
 import org.example.model.Orders;
-import org.example.model.Specification;
+
 import static io.restassured.RestAssured.given;
 
 public class CreateOrder extends Specification {
@@ -26,4 +26,13 @@ public class CreateOrder extends Specification {
                 .post(Data.URL + Data.ApiOrders)
                 .then().log().all();
     }
+        @Step("Получение заказа конкретного пользователя")
+        public ValidatableResponse getOrder(String token){
+            return given()
+                    .spec(requestSpec())
+                    .header("Authorization",token)
+                    .when()
+                    .get(Data.URL + Data.ApiOrders)
+                    .then().log().all();
+        }
 }

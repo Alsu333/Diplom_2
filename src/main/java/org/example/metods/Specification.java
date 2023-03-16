@@ -1,4 +1,4 @@
-package org.example.model;
+package org.example.metods;
 
 import io.restassured.RestAssured;
 import io.restassured.builder.RequestSpecBuilder;

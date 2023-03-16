@@ -1,4 +1,4 @@
-package org.example.model;
+package org.example;
 
 public class Data {
     public final static String LOGIN = "369801@yandex.ru";// email for sign up
