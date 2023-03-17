@@ -30,7 +30,7 @@ public class UpdateAccountTest {
     }
     @Test
     @DisplayName("клиент не может изменить данные без авторизацией")
-    public void NotUpdateAccount() {
+    public void notUpdateAccount() {
 
         ValidatableResponse response1 = createAccount.change("", new Credentials(Data.LOGIN, Data.PASSWORD));
         int statusCode = response1.extract().statusCode();

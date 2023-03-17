@@ -27,7 +27,7 @@ public class CreateOrdersTest {
     }
     @Test
     @DisplayName("Создание заказа с авторизацией")
-    public void CreateOrderSuccessTest(){
+    public void createOrderSuccessTest(){
         ValidatableResponse response = createAccount.login(credentials);
         token = response.extract().path("accessToken");
         List<String> ingredients = List.of("61c0c5a71d1f82001bdaaa6d", "61c0c5a71d1f82001bdaaa6f");
@@ -39,7 +39,7 @@ public class CreateOrdersTest {
     }
     @Test
     @DisplayName("Создание зааза без авторизации")
-    public void CresteOrderWithotTokenTest(){
+    public void cresteOrderWithotTokenTest(){
         List<String> ingredients = List.of("61c0c5a71d1f82001bdaaa6d", "61c0c5a71d1f82001bdaaa6f");
         Orders order = new Orders(ingredients);
         ValidatableResponse response = createOrder.createOrderWithoutToken(order);
@@ -49,7 +49,7 @@ public class CreateOrdersTest {
     }
     @Test
     @DisplayName("Создание заказа без ингридиентов")
-    public void CreateOrderWithoutIngredientsTest(){
+    public void createOrderWithoutIngredientsTest(){
         ValidatableResponse response = createAccount.login(credentials);
         token = response.extract().path("accessToken");
         Orders order = new Orders(null);
@@ -60,7 +60,7 @@ public class CreateOrdersTest {
     }
     @Test
     @DisplayName("Создание заказа без авторизацией и с неверным хешем ингредиентов")
-    public void CreateOrderWithWrongIngredientsTest(){
+    public void createOrderWithWrongIngredientsTest(){
         List<String> ingredients = List.of("61c0c5a71d1f82001bd", "61c0c5a71d1f82a6f");
         Orders order = new Orders(ingredients);
         ValidatableResponse response1 = createOrder.createOrder("",order);

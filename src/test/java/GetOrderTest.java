@@ -25,7 +25,7 @@ public class GetOrderTest {
     }
     @Test
     @DisplayName("Получение заказа авторизованного пользователя")
-    public void CreateOrderSuccessTest(){
+    public void createOrderSuccessTest(){
         ValidatableResponse response = createAccount.login(credentials);
         token = response.extract().path("accessToken");
         ValidatableResponse response1 = createOrder.getOrder(token);
@@ -35,7 +35,7 @@ public class GetOrderTest {
     }
     @Test
     @DisplayName("Получение заказа неавторизованного пользователя")
-    public void CreateOrderNotSuccessTest(){
+    public void createOrderNotSuccessTest(){
         ValidatableResponse response = createOrder.getOrder("");
         int statusCode = response.extract().statusCode();
         response.assertThat().body("success", is(false)).and().body("message",equalTo("You should be authorised"));
